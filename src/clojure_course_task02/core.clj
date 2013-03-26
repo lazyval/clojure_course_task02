@@ -6,7 +6,7 @@
        file-seq
        (filter #(.isFile %))
        (map #(.getName %))
-       (filter #(re-matches (re-pattern filename) %))
+       (filter #(re-matches (re-pattern file-name) %))
        ))
 
 (defn- usage []
