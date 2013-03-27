@@ -1,13 +1,14 @@
 (ns clojure-course-task02.core
+  (:require [clojure.core.reducers :as r])
   (:gen-class))
 
-(defn- find-files [file-name path]
+(defn find-files [file-name path]
   (->> (java.io.File. path)
        file-seq
        (filter #(.isFile %))
-       (map #(.getName %))
-       (filter #(re-matches (re-pattern file-name) %))
-       ))
+       (r/map #(.getName %))
+       (r/filter #(re-matches (re-pattern file-name) %))
+       (into [])))
 
 (defn- usage []
   (println "Usage: $ run.sh file_name path"))
