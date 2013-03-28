@@ -2,12 +2,12 @@
   (:require [clojure.core.reducers :as r])
   (:gen-class))
 
-(defn find-files [file-name path]
+(defn find-files [pattern path]
   (->> (java.io.File. path)
        file-seq
-       (filter #(.isFile %))
+       (r/filter #(.isFile %))
        (r/map #(.getName %))
-       (r/filter #(re-matches (re-pattern file-name) %))
+       (r/filter #(re-matches (re-pattern pattern) %))
        (into [])))
 
 (defn- usage []
